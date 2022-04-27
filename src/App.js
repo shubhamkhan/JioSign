@@ -10,6 +10,7 @@ import Header from './components/view/Header/Header';
 import Home from './components/view/Home/Home';
 import Login from "./components/view/Login/Login";
 import Register from "./components/view/Register/Register";
+import Dashboard from "./components/view/Dashboard/Dashboard";
 
 export const UserContext = createContext();
 
@@ -23,6 +24,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="register" element={<Register />} />
+            <Route path="dashboard" element={<Dashboard />} />
             <Route path="login" element={<Login />} />
             {/* <Route path="logout" element={<Logout />} /> */}
           </Routes>

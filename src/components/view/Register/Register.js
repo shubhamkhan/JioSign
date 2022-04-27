@@ -18,63 +18,73 @@ const Register = () => {
   const navigate = useNavigate();
 
     const [user, setUser] = useState({
-        name: "",
-        email: "",
-        password: "",
-        password2: "",
-        country: "",
-        pincode: "",
-        address: ""
+      name: "",
+      email: "",
+      password: "",
+      password2: "",
+      country: "",
+      pincode: "",
+      address: ""
     });
 
     let key, value;
 
     const handleInputs = (e) => {
-        key = e.target.name;
-        value = e.target.value;
-        console.log(key,value);
+      key = e.target.name;
+      value = e.target.value;
 
-        setUser({...user, [key]:value});
+      setUser({...user, [key]:value});
     }
 
     const sendData = async (e) => {
-        e.preventDefault();
+      e.preventDefault();
+      // const updatedJSON = {
+      //   "name":"arif updated",
+      //   "surname":"shariati updated"
+      // }
+    // fs.writeFile('./myFile.json', JSON.stringify(""), (err) => {
+    //   if (err) console.log('Error writing file:', err);
+    // });
 
-        const { name, email, password, password2, country, pincode, address } = user;
+      console.log(user);
+      navigate("/login");
 
-        const res = await fetch("/register", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({name, email, password, password2, country, pincode, address})
-        });
+      // const { name, email, password, password2, country, pincode, address } = user;
 
-        const data = await res.json();
-        if(data && res.status === 201) {
-            console.log("Successfull Registration" + res.status);
-            console.log(data);
-            navigate("/login");
-        } else {
-            console.log("Invalid Registration"); 
-        }
+      // const res = await fetch("/register", {
+      //   method: "POST",
+      //   headers: {
+      //     "Content-Type": "application/json"
+      //   },
+      //   body: JSON.stringify({name, email, password, password2, country, pincode, address})
+      // });
+
+      // const data = await res.json();
+
+      // if(data && res.status === 201) {
+      //   console.log("Successfull Registration" + res.status);
+      //   console.log(data);
+      //   navigate("/login");
+      // } else {
+      //   console.log("Invalid Registration"); 
+      // }
     }
 
-  const [state, setState] = React.useState({
-    gilad: true,
-    jason: false,
-    antoine: false,
-  });
+  // const [state, setState] = React.useState({
+  //   gilad: true,
+  //   jason: false,
+  //   antoine: false,
+  // });
 
-  const handleChange = (event) => {
-    setState({
-      ...state,
-      [event.target.name]: event.target.checked,
-    });
-  };
+  // const handleChange = (event) => {
+  //   setState({
+  //     ...state,
+  //     [event.target.name]: event.target.checked,
+  //   });
+  // };
 
-  const { gilad, jason, antoine } = state;
-  const error = [gilad, jason, antoine].filter((v) => v).length !== 2;
+  // const { gilad, jason, antoine } = state;
+  // const error = [gilad, jason, antoine].filter((v) => v).length !== 2;
   return (
     <React.Fragment>
     <CssBaseline />
@@ -152,12 +162,13 @@ const Register = () => {
         <Typography variant="h5" gutterBottom component="div" style={{fontWeight: '600'}}>
           Create an Account
         </Typography>
-        {/* <form method='POST'> */}
-          <Box component="form" sx={{'& .MuiTextField-root': { m: 1, width: '25ch' },}} noValidate  autoComplete="off">
+        <form method='POST'>
+          <Box sx={{'& .MuiTextField-root': { m: 1, width: '25ch' },}} noValidate  autoComplete="off">
             <div align='left'>
               <TextField
                 required
                 id="name"
+                name="name"
                 label="Name"
                 placeholder='Name'
                 value={user.name}
@@ -166,6 +177,7 @@ const Register = () => {
               <TextField
                 required
                 id="email"
+                name="email"
                 label="Contact Email ID / Mobile Number"
                 placeholder='Email ID / Mobile'
                 value={user.email}
@@ -174,6 +186,7 @@ const Register = () => {
               <TextField
                 required
                 id="password"
+                name="password"
                 label="Password"
                 type="password"
                 autoComplete="current-password"
@@ -183,6 +196,7 @@ const Register = () => {
               <TextField
                 required
                 id="password2"
+                name="password2"
                 label="Confrom Password"
                 type="password"
                 autoComplete="current-password"
@@ -192,6 +206,7 @@ const Register = () => {
               <TextField
                 required
                 id="country"
+                name="country"
                 label="Country"
                 placeholder='Country'
                 value={user.country}
@@ -200,6 +215,7 @@ const Register = () => {
               <TextField
                 required
                 id="pincode"
+                name="pincode"
                 label="Pincode"
                 placeholder='Pincode'
                 value={user.pincode}
@@ -208,6 +224,7 @@ const Register = () => {
               <TextField
                 required
                 id="address"
+                name="address"
                 label="Address"
                 placeholder="Address"
                 multiline
@@ -218,7 +235,11 @@ const Register = () => {
             </div>
             
             <Typography variant="subtitle2" gutterBottom component="div" style={{fontWeight: '600'}}>
-              <Checkbox checked={jason} onChange={handleChange} name="jason" />
+              <Checkbox
+                // checked={jason}
+                // onChange={handleChange}
+                name="jason"
+              />
               I agree to <Link to='/terms'><u>Terms and Conditions</u></Link> and <Link to='/privacy'><u>Privacy Policy</u></Link> of JioSign.
             </Typography>
 
@@ -234,7 +255,7 @@ const Register = () => {
               Proceed
             </Button>
           </Box>
-        {/* </form> */}
+        </form>
       </Grid>
     </Grid>
       

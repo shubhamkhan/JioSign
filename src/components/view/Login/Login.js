@@ -22,24 +22,26 @@ const Login = () => {
 
   const loginUser = async (e) => {
     e.preventDefault();
+    console.log(email, password);
+    navigate("/dashboard");
 
-    const res = await fetch("/login", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({email, password})
-    });
+    // const res = await fetch("/login", {
+    //   method: "POST",
+    //   headers: {
+    //     "Content-Type": "application/json"
+    //   },
+    //   body: JSON.stringify({email, password})
+    // });
 
-    const data = res.json();
+    // const data = res.json();
 
-    if(res.status === 200 && data) {
-      dispatch({type: 'USER', payload: true})
-      console.log("Login Sucessful");
-      navigate("/");
-    } else {
-      console.log("Invalid Credentials");
-    }
+    // if(res.status === 200 && data) {
+    //   dispatch({type: 'USER', payload: true})
+    //   console.log("Login Sucessful");
+    //   navigate("/");
+    // } else {
+    //   console.log("Invalid Credentials");
+    // }
 
   }
   return (
@@ -120,7 +122,7 @@ const Login = () => {
           Sign in to JioSign
         </Typography>
         <form method='POST'>
-          <Box component="form" sx={{'& .MuiTextField-root': { m: 1, width: '25ch' },}} noValidate  autoComplete="off">
+          <Box sx={{'& .MuiTextField-root': { m: 1, width: '25ch' },}} noValidate  autoComplete="off">
             <div>
               <TextField
                 required
